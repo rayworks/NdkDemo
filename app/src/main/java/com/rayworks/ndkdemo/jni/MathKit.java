@@ -6,6 +6,8 @@ package com.rayworks.ndkdemo.jni;
 public class MathKit {
     public static native int square(int num);
 
+    public static native long cube(int num);
+
     static {
         System.loadLibrary("jnidemo");
     }

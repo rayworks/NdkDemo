@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(MainActivity.this, String.format("Square of 2 equals to %d", new MathKit().square(2)), Toast.LENGTH_LONG).show();
+                                String text = String.format("Cube of 2 equals to %d", MathKit.cube(2));
+                                Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG).show();
                             }
                         }).show();
             }
