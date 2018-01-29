@@ -1,21 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.rayworks.ndkdemo"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 
-        ndk{
-            moduleName "jnidemo"
-            stl "stlport_shared"
-            ldLibs "log","z", "m"
-            cFlags "-I/some/include/path"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
         }
     }
     buildTypes {
@@ -25,6 +24,11 @@ android {
         }
     }
 
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
 
     splits {
         abi {
@@ -41,7 +45,7 @@ android {
         // assign different version code for each output
         variant.outputs.each { output ->
             output.versionCodeOverride =
-                project.ext.versionCodes.get(output.getFilter(com.android.build.OutputFile.ABI), 0) * 1000000 + android.defaultConfig.versionCode
+                    project.ext.versionCodes.get(output.getFilter(com.android.build.OutputFile.ABI), 0) * 1000000 + android.defaultConfig.versionCode
         }
     }
 }
@@ -49,6 +53,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:design:23.2.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
 }
